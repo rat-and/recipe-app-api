@@ -8,7 +8,7 @@ services:
 before_install:
   - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
 
-before_script: pip install docker-compose pytest codecov pytest-cov
+before_script: pip install docker-compose
 
 script:
-  - docker-compose run app sh -c "python manage.py wait_for_db && coverage run --source='.' manage.py test && coverage report"
+  - docker-compose run --user root app sh -c "python manage.py wait_for_db && coverage run --source='.' manage.py test && coverage report"
