@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')  # pragma: no cover
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'app.settings')
 
-application = get_wsgi_application()    # pragma: no cover | As above
+application = get_wsgi_application()    # pragma: no cover | Some explanation
