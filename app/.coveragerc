@@ -1,7 +1,7 @@
 # .coveragerc to control coverage.py
 [run]
 branch = true
-#omit = manage.py, */migrations/*, */settings/*, */__init__.py, */wsgi.py, */asgi.py
+omit = manage.py, */migrations/*, */settings/*, */wsgi.py, */asgi.py
 
 [report]
 # Regexes for lines to exclude from consideration
