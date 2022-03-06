@@ -36,8 +36,8 @@ run-unit-tests:  ## Run unit tests on DEV instance
  		down --remove-orphans
 	@echo "[DEV-INFO] Unit Tests on DEV instance(s) were successfully run!"
 
-.PHONY: run-ut-with-coverage
-run-ut-with-coverage:  ## Run unit tests with coverage on DEV instance
+.PHONY: run-ut-coverage-report
+run-ut-coverage-report:  ## Run unit tests with coverage report on DEV instance
 	@docker-compose \
 		--file docker-compose.yml run \
 		--rm \
@@ -47,6 +47,18 @@ run-ut-with-coverage:  ## Run unit tests with coverage on DEV instance
 		--file docker-compose.yml \
  		down --remove-orphans
 	@echo "[DEV-INFO] Unit Tests on DEV instance(s) were successfully run! Coverage report in ./app/.coverage.report"
+
+.PHONY: run-ut-coverage-html
+run-ut-coverage-html:  ## Run unit tests with coverage html report on DEV instance
+	@docker-compose \
+		--file docker-compose.yml run \
+		--rm \
+		app \
+		sh -c "python manage.py wait_for_db && coverage run --source='.' manage.py test && coverage html && coverage erase"
+	@docker-compose \
+		--file docker-compose.yml \
+ 		down --remove-orphans
+	@echo "[DEV-INFO] Unit Tests on DEV instance(s) were successfully run! HTML coverage report in ./app/htmlcov/index.html"
 
 .PHONY: down-dev-env
 down-dev-env:  ## Stop and clear DEV instance
