@@ -116,7 +116,8 @@ class PrivateRecipeApiTests(TestCase):
         recipe = Recipe.objects.get(id=res.data['id'])
         # Decimal fields has to be parsed before check, mind rounding
         price = payload.pop('price')
-        self.assertEqual(Decimal('{:.2f}'.format(price)), getattr(recipe, 'price'))
+        self.assertEqual(Decimal('{:.2f}'.format(price)),
+                         getattr(recipe, 'price'))
         # Rest fields check
         for key in payload.keys():
             self.assertEqual(payload[key], getattr(recipe, key))
@@ -142,8 +143,10 @@ class PrivateRecipeApiTests(TestCase):
 
     def test_create_recipe_with_ingredients(self):
         """Test creating a recipe with ingredients"""
-        ingredient1 = sample_ingredient(user=self.user, name='FirstIngredient')
-        ingredient2 = sample_ingredient(user=self.user, name='SecondIngredient')
+        ingredient1 = sample_ingredient(user=self.user,
+                                        name='FirstIngredient')
+        ingredient2 = sample_ingredient(user=self.user,
+                                        name='SecondIngredient')
         payload = {
             'title': 'Ingredients Check',
             'ingredients': [ingredient1.id, ingredient2.id],
@@ -194,5 +197,6 @@ class PrivateRecipeApiTests(TestCase):
         tags = recipe.tags.all()
         self.assertEqual(recipe.title, payload['title'])
         self.assertEqual(recipe.time_minutes, payload['time_minutes'])
-        self.assertEqual(recipe.price, Decimal('{:.2f}'.format(payload['price'])))
+        self.assertEqual(recipe.price,
+                         Decimal('{:.2f}'.format(payload['price'])))
         self.assertEqual(len(tags), 0)
