@@ -20,6 +20,7 @@ run-dev-env:
 		--file docker-compose.yml run \
 		--rm \
 		--detach \
+		--publish 8082:8000 \
 		$(SERVICE_NAME)
 	@echo "[DEV-INFO] DEV instances were successfully started!"
 
@@ -28,6 +29,7 @@ run-dev-env-it:
 	@docker-compose \
 		--file docker-compose.yml run \
 		--rm \
+		--publish 8082:8000 \
 		$(SERVICE_NAME) \
 		sh -c '/bin/sh'
 	@docker-compose \
